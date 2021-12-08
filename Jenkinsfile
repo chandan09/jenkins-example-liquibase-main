@@ -11,12 +11,12 @@ pipeline {
     }
     stage('Status') {
       steps {
-        bat 'liquibase status --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
+        bat 'liquibase status --url="jdbc:mysql://localhost:3306/inventory" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
       }
     }
     stage('Update') {
       steps {
-        bat 'liquibase update --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
+        bat 'liquibase update --url="jdbc:mysql://localhost:3306/inventory" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
       }
     }
   }

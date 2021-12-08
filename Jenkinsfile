@@ -4,14 +4,19 @@ pipeline {
   MYSQL_CRED = "mysql_id"
 }
   stages {
+    stage('Test') {
+      steps {
+        bat 'liquibase -version'
+      }
+    }
     stage('Status') {
       steps {
-        sh 'liquibase status --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
+        bat 'liquibase status --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
       }
     }
     stage('Update') {
       steps {
-        sh 'liquibase update --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
+        bat 'liquibase update --url="jdbc:mysql://localhost:3306/chandandb" --changeLogFile=my_app-wrapper.xml --username=$MYSQL_CRED_USR --password=$MYSQL_CRED_PSW'
       }
     }
   }
